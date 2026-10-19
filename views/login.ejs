@@ -1,0 +1,17 @@
+<%- include('partials/header',{title}) %>
+<section class="card auth">
+  <h1>Sign in</h1>
+  <p>Access your campus service queue.</p>
+  <form method="post" action="/login">
+    <label>Email<input type="email" name="email" required autocomplete="username" /></label
+    ><label
+      >Password<input
+        type="password"
+        name="password"
+        required
+        autocomplete="current-password" /></label
+    ><button class="button full">Log in</button>
+  </form>
+  <small>Local demo accounts are listed in README.md.</small>
+</section>
+<%- include('partials/footer') %>

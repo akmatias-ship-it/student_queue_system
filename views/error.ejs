@@ -1,0 +1,11 @@
+<%- include('partials/header',{title}) %>
+<section class="card auth">
+  <small
+    >ERROR
+    <%= status %></small
+  >
+  <h1><%= title %></h1>
+  <p><%= message %></p>
+  <a class="button" href="<%= currentUser?'/dashboard':'/login' %>">Return</a>
+</section>
+<%- include('partials/footer') %>

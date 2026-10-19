@@ -1,0 +1,60 @@
+<%- include('partials/header',{title}) %>
+
+<h1>Queue desk</h1>
+<section class="card">
+	<form method="get" action="/queue/staff">
+		<label>Service
+			<select name="service_id">
+				<% services.forEach(x=>{ %>
+				<option value="<%= x.id %>" <%= Number(serviceId)===x.id?'selected':'' %>><%= x.name %></option>
+				<% }) %>
+			</select>
+		</label>
+		<button class="button secondary">Show queue</button>
+	</form>
+	<form method="post" action="/queue/call-next">
+		<input type="hidden" name="service_id" value="<%= serviceId %>">
+		<button class="button">Call next waiting student</button>
+	</form>
+</section>
+
+<% if(!tickets.length){ %>
+<p class="card">No tickets for this service today.</p>
+<% }else{ %>
+<div class="tablewrap">
+	<table>
+		<tr>
+			<th>Ticket</th>
+			<th>Student</th>
+			<th>Student No.</th>
+			<th>Status</th>
+			<th>Update</th>
+		</tr>
+		<% tickets.forEach(t=>{ %>
+		<tr>
+			<td><b><%= t.ticket_number %></b></td>
+			<td><%= t.full_name %></td>
+			<td><%= t.student_number||'—' %></td>
+			<td><span class="status <%= t.status %>"><%= t.status %></span></td>
+			<td>
+				<% if(['waiting','called','serving'].includes(t.status)){ %>
+				<form class="inline" method="post" action="/queue/<%= t.id %>/status">
+					<select name="status">
+						<option value="serving">Serving</option>
+						<option value="completed">Completed</option>
+						<option value="no_show">No-show</option>
+						<option value="cancelled">Cancelled</option>
+					</select>
+					<button class="button small">Save</button>
+				</form>
+				<% }else{ %>
+				—
+				<% } %>
+			</td>
+		</tr>
+		<% }) %>
+	</table>
+</div>
+<% } %>
+
+<%- include('partials/footer') %>

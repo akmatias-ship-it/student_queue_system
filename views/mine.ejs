@@ -1,0 +1,35 @@
+<%- include('partials/header',{title}) %>
+<div class="heading">
+  <h1>My queue tickets</h1>
+  <a class="button secondary" href="/dashboard">Join queue</a>
+</div>
+<% if(!tickets.length){ %>
+<p class="card">No tickets yet. Join a service from your dashboard.</p>
+<% }else{ %>
+<div class="tablewrap">
+  <table>
+    <tr>
+      <th>Ticket</th>
+      <th>Service</th>
+      <th>Status</th>
+      <th>Joined</th>
+      <th>Action</th>
+    </tr>
+    <% tickets.forEach(t=>{ %>
+    <tr>
+      <td><b><%= t.ticket_number %></b></td>
+      <td><%= t.service_name %></td>
+      <td><span class="status <%= t.status %>"><%= t.status %></span></td>
+      <td><%= new Date(t.created_at).toLocaleString() %></td>
+      <td>
+        <% if(t.status==='waiting'){ %>
+        <form method="post" action="/queue/<%= t.id %>/cancel">
+          <button class="danger">Cancel</button>
+        </form>
+        <% }else{ %>—<% } %>
+      </td>
+    </tr>
+    <% }) %>
+  </table>
+</div>
+<% } %><%- include('partials/footer') %>

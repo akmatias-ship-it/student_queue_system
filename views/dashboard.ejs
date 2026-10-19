@@ -1,0 +1,66 @@
+<%- include('partials/header',{title}) %>
+<div class="heading">
+  <div>
+    <small>CAMPUS QUEUE</small>
+    <h1>
+      Hello,
+      <%= currentUser.fullName %>
+    </h1>
+    <p>
+      Signed in as <b><%= currentUser.role %></b>
+    </p>
+  </div>
+</div>
+<% if(currentUser.role==='student'){ %>
+<h2>Available services</h2>
+<section class="grid">
+  <% services.forEach(s=>{ %>
+  <article class="card">
+    <h3><%= s.name %></h3>
+    <p><%= s.description||'Campus service desk' %></p>
+    <form method="post" action="/queue/join">
+      <input type="hidden" name="service_id" value="<%= s.id %>" /><button class="button full">
+        Join queue
+      </button>
+    </form>
+  </article>
+  <% }) %>
+</section>
+<h2>Recent tickets</h2>
+<% if(!tickets.length){ %>
+<p class="empty">No tickets yet.</p>
+<% }else{ %>
+<div class="tablewrap">
+  <table>
+    <tr>
+      <th>Ticket</th>
+      <th>Service</th>
+      <th>Status</th>
+      <th>Joined</th>
+    </tr>
+    <% tickets.forEach(t=>{ %>
+    <tr>
+      <td><b><%= t.ticket_number %></b></td>
+      <td><%= t.service_name %></td>
+      <td><span class="status <%= t.status %>"><%= t.status %></span></td>
+      <td><%= new Date(t.created_at).toLocaleString() %></td>
+    </tr>
+    <% }) %>
+  </table>
+</div>
+<a href="/queue/mine">View all tickets</a><% } %>
+<% }else{ %>
+<section class="grid">
+  <% Object.keys(stats).forEach(k=>{ %>
+  <article class="card stat">
+    <span><%= k %></span><strong><%= stats[k] %></strong>
+  </article>
+  <% }) %>
+</section>
+<section class="card">
+  <h2>Queue desk</h2>
+  <p>Call the next waiting student and update ticket statuses.</p>
+  <a class="button" href="/queue/staff">Open queue desk</a><% if(currentUser.role==='admin'){ %>
+  <a class="button secondary" href="/admin/services">Manage services</a><% } %>
+</section>
+<% } %><%- include('partials/footer') %>

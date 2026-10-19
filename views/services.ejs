@@ -1,0 +1,38 @@
+<%- include('partials/header',{title}) %>
+<h1>Manage services</h1>
+<section class="card">
+  <h2>Add service</h2>
+  <form method="post" action="/admin/services">
+    <label>Service name<input name="name" maxlength="100" required /></label
+    ><label>Description<input name="description" maxlength="255" /></label
+    ><button class="button">Add service</button>
+  </form>
+</section>
+<section class="card">
+  <h2>Existing services</h2>
+  <div class="tablewrap">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+      <% services.forEach(x=>{ %>
+      <tr>
+        <td><%= x.name %></td>
+        <td><%= x.description||'—' %></td>
+        <td><%= x.is_active?'Active':'Inactive' %></td>
+        <td>
+          <form method="post" action="/admin/services/<%= x.id %>/toggle">
+            <button class="button secondary small">
+              <%= x.is_active?'Deactivate':'Activate' %>
+            </button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </table>
+  </div>
+</section>
+<%- include('partials/footer') %>
