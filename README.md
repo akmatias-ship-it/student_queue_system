@@ -83,6 +83,15 @@ No live public display, QR check-in, SMS/email alerts, estimated wait times, sel
 
 AI assistance was used to draft starter code and documentation. The team is responsible for reviewing, modifying, testing, understanding, and accurately disclosing AI-assisted work.
 
+## Troubleshooting
+
+- **Database connection error:** Make sure MySQL is running and the database credentials in `.env` are correct.
+- **Missing environment variables:** Check that you copied `.env.example` to `.env` and filled in the required values.
+- **Port already in use:** Stop the other application using port 3000 or configure the app to use another available port.
+- **Dependencies missing:** Run `npm install` in the project folder.
+- **Tests failing:** Run `npm test` and review the error messages before troubleshooting.
+
+
 ## License
 
 MIT; see `LICENSE`.
