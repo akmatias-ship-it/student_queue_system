@@ -4,9 +4,9 @@ A campus queue web application built with Node.js, Express, EJS, and MySQL for t
 
 ## Team members
 
-- Member 1: Atos
-- Member 2: Matias
-- Member 3: Molina
+- Member 1: Atos, Danielle Cherisse M.
+- Member 2: Matias, Akia Joshua S.
+- Member 3: Molina, Jhazmine T.
 
 Do not submit placeholders; fill in your actual team members.
 
