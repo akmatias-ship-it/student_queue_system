@@ -8,8 +8,6 @@ A campus queue web application built with Node.js, Express, EJS, and MySQL for t
 - Member 2: Matias, Akia Joshua S.
 - Member 3: Molina, Jhazmine T.
 
-Do not submit placeholders; fill in your actual team members.
-
 ## Features
 
 - Login/logout with server-side sessions and bcrypt password hashing
